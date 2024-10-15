@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Chat Client</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        input, button, textarea {
+            margin-top: 10px;
+            display: block;
+        }
+        textarea {
+            width: 100%;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Chat with AI</h1>
+    <label for="role">Enter role:</label>
+    <input type="text" id="role" placeholder="System role..." />
+    
+    <label for="message">Enter message:</label>
+    <textarea id="message" placeholder="Your message..."></textarea>
+    
+    <button id="sendBtn">Send</button>
+    
+    <h2>Response:</h2>
+    <div id="response"></div>
+
+    <script>
+        const serverURL = "http://169.254.250.139:1234/v1"; // Local server address
+
+        document.getElementById('sendBtn').addEventListener('click', async () => {
+            const role = document.getElementById('role').value;
+            const userMessage = document.getElementById('message').value;
+
+            if (!role || !userMessage) {
+                alert("Please fill out both the role and message fields.");
+                return;
+            }
+
+            const requestBody = {
+                model: "model-identifier",  // Use your specific model
+                messages: [
+                    { role: "system", content: role },
+                    { role: "user", content: userMessage }
+                ],
+                temperature: 0.7
+            };
+
+            try {
+                const response = await fetch(`${serverURL}/chat/completions`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer lm-studio" // API Key placeholder
+                    },
+                    body: JSON.stringify(requestBody)
+                });
+
+                const data = await response.json();
+                document.getElementById('response').innerText = data.choices[0].message.content;
+            } catch (error) {
+                console.error("Error:", error);
+                document.getElementById('response').innerText = "Error communicating with AI server.";
+            }
+        });
+    </script>
+</body>
+</html>
