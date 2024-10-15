@@ -1,7 +1,7 @@
 import requests
 
 # Point to the ngrok URL (replace with your ngrok URL)
-base_url = "http://169.254.250.139:1234"
+base_url = "https://8fd9-91-232-214-241.ngrok-free.app/v1"
 
 while True:
     user_input = input("User: ")

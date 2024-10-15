@@ -1,7 +1,7 @@
 from openai import OpenAI
 
 # Point to the local server
-client = OpenAI(base_url="http://169.254.250.139:1234/v1", api_key="lm-studio")
+client = OpenAI(base_url="https://8fd9-91-232-214-241.ngrok-free.app/v1", api_key="lm-studio")
 
 print("Napis co chces ai: ")
 

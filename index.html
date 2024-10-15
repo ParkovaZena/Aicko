@@ -33,7 +33,7 @@
     <div id="response"></div>
 
     <script>
-        const serverURL = "http://169.254.250.139:1234/v1"; // Local server address
+        const serverURL = "https://8fd9-91-232-214-241.ngrok-free.app/v1"; 
 
         document.getElementById('sendBtn').addEventListener('click', async () => {
             const role = document.getElementById('role').value;
@@ -45,7 +45,7 @@
             }
 
             const requestBody = {
-                model: "model-identifier",  // Use your specific model
+                model: "model-identifier", 
                 messages: [
                     { role: "system", content: role },
                     { role: "user", content: userMessage }
@@ -58,7 +58,7 @@
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
-                        "Authorization": "Bearer lm-studio" // API Key placeholder
+                        "Authorization": "Bearer lm-studio" 
                     },
                     body: JSON.stringify(requestBody)
                 });
